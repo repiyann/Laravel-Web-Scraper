@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/scraped', [ScrapeController::class, 'scrape'])->name('scrape');
+Route::get('/search', [ScrapeController::class, 'searchRecipe'])->name('searchRecipe');

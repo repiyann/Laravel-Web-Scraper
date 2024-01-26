@@ -9,7 +9,7 @@
     <h1>Scraped Data</h1>
 
     <!-- Search Form -->
-    <form method="GET" action="{{ route('scrape') }}">
+    <form method="GET" action="{{ route('searchRecipe') }}">
         <label for="q">Search:</label>
         <input type="text" name="q" id="q" value="{{ $searchQuery }}" />
         <button type="submit">Search</button>
@@ -26,8 +26,7 @@
                     <img src="{{ $recipe['thumb'] }}" alt="{{ $recipe['title'] }} Thumbnail">
                     <h3>{{ $recipe['thumb'] }}</h3>
                     <h3>{{ $recipe['key'] }}</h3>
-                    <h3>{{ $recipe['times'] }}</h3>
-                    <h3>{{ $recipe['serving'] }}</h3>
+                    <h3>{{ $recipe['cookTime'] }}</h3>
                     <h3>{{ $recipe['difficulty'] }}</h3>
                 </li>
             @endforeach
