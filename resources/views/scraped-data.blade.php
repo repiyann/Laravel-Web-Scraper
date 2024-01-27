@@ -25,7 +25,9 @@
                     <!-- Display other recipe information as needed -->
                     <img src="{{ $recipe['thumb'] }}" alt="{{ $recipe['title'] }} Thumbnail">
                     <h3>{{ $recipe['thumb'] }}</h3>
+                    <h3>{{ $recipe['resUrl']}}</h3>
                     <h3>{{ $recipe['key'] }}</h3>
+                    <h3>{{ $recipe['keyword'] }}</h3>
                     <h3>{{ $recipe['cookTime'] }}</h3>
                     <h3>{{ $recipe['difficulty'] }}</h3>
                 </li>
@@ -34,7 +36,8 @@
     @else
         <p>No results found for '{{ $searchQuery }}'</p>
     @endif
-    
+
     <a href="{{ route('searchCategory') }}">Category</a>
+    <a href="{{ route('searchArticle') }}">Article</a>
 </body>
 </html>

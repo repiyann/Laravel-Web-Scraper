@@ -19,7 +19,7 @@ class ScrapeController extends Controller
         $baseUrl = 'https://www.masakapahariini.com/';
         $categoriesUrl = $baseUrl . 'resep/';
         $recipesUrl = $baseUrl . '/?s=';
-        
+
         $data = $this->scraperService->scrapeCategoriesAndRecipes($categoriesUrl, $recipesUrl);
 
         return view('scraped-both', $data);
@@ -35,7 +35,7 @@ class ScrapeController extends Controller
         return view('scraped-data', ['recipes' => $recipes, 'searchQuery' => $searchQuery]);
     }
 
-    public function searchCategory(Request $request)
+    public function searchCategory()
     {
         $baseUrl = 'https://www.masakapahariini.com/';
         $categoriesUrl = $baseUrl . 'resep/';
@@ -43,5 +43,24 @@ class ScrapeController extends Controller
         $categories = $this->scraperService->scrapeCategories($categoriesUrl);
 
         return view('scraped-category', ['categories' => $categories]);
+    }
+
+    public function searchArticle()
+    {
+        $baseUrl = 'https://www.masakapahariini.com/';
+        $articleUrl = $baseUrl . 'artikel/';
+
+        $articles = $this->scraperService->scrapeCategories($articleUrl);
+
+        return view('scraped-article', ['articles' => $articles]);
+    }
+
+    public function recipeDetail($recipeKey)
+    {
+        $baseUrl = 'https://www.masakapahariini.com/';
+
+        $recipeData = $this->scraperService->recipeDetail($baseUrl, $recipeKey);
+
+        return view('recipe-detail', ['recipeData' => $recipeData]);
     }
 }

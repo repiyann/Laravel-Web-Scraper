@@ -19,4 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/search', [ScrapeController::class, 'searchRecipe'])->name('searchRecipe');
-Route::get('/search/category', [ScrapeController::class, 'searchCategory'])->name('searchCategory');
+Route::get('/recipe/category', [ScrapeController::class, 'searchCategory'])->name('searchCategory');
+Route::get('/article/category', [ScrapeController::class, 'searchArticle'])->name('searchArticle');
+Route::get('/recipe-detail/{recipeKey}', [ScrapeController::class, 'recipeDetail'])->name('recipeDetail');
