@@ -34,21 +34,7 @@
     @else
         <p>No results found for '{{ $searchQuery }}'</p>
     @endif
-
-    @if(!empty($categories))
-        <!-- Display Search Results -->
-        <h2>Search Results for '{{ $searchQuery }}'</h2>
-        <ul>
-            @foreach($categories as $category)
-                <li>
-                    <h2>{{ $category['title'] }}</h3>
-                    <h3>{{ $category['key'] }}</h3>
-                    <h3>{{ $category['resUrl'] }}</h3>
-                </li>
-            @endforeach
-        </ul>
-    @else
-        <p>No results found for '{{ $searchQuery }}'</p>
-    @endif
+    
+    <a href="{{ route('searchCategory') }}">Category</a>
 </body>
 </html>
