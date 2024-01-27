@@ -5,8 +5,6 @@ namespace App\Services;
 use GuzzleHttp\Client;
 use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Http\Request;
 
 class ScraperService
 {

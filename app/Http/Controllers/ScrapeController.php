@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Services\ScraperService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ScrapeController extends Controller
 {
     private $scraperService;
+    private $baseUrl;
 
     public function __construct(ScraperService $scraperService)
     {
         $this->scraperService = $scraperService;
+        $this->baseUrl = App::make('base_url');
     }
 
     public function index()
     {
-        $baseUrl = 'https://www.masakapahariini.com/';
-        $categoriesUrl = $baseUrl . 'resep/';
-        $recipesUrl = $baseUrl . '/?s=';
-
+        $categoriesUrl = $this->baseUrl . 'resep/';
+        $recipesUrl = $this->baseUrl . '/?s=';
         $data = $this->scraperService->scrapeCategoriesAndRecipes($categoriesUrl, $recipesUrl);
 
         return view('scraped-both', $data);
@@ -27,19 +28,15 @@ class ScrapeController extends Controller
 
     public function searchRecipe(Request $request)
     {
-        $baseUrl = 'https://www.masakapahariini.com/';
         $searchQuery = $request->input('q');
-
-        $recipes = $this->scraperService->scrapeRecipes($baseUrl, $searchQuery);
+        $recipes = $this->scraperService->scrapeRecipes($this->baseUrl, $searchQuery);
 
         return view('scraped-data', ['recipes' => $recipes, 'searchQuery' => $searchQuery]);
     }
 
     public function searchCategory()
     {
-        $baseUrl = 'https://www.masakapahariini.com/';
-        $categoriesUrl = $baseUrl . 'resep/';
-
+        $categoriesUrl = $this->baseUrl . 'resep/';
         $categories = $this->scraperService->scrapeCategories($categoriesUrl);
 
         return view('scraped-category', ['categories' => $categories]);
@@ -47,9 +44,7 @@ class ScrapeController extends Controller
 
     public function searchArticle()
     {
-        $baseUrl = 'https://www.masakapahariini.com/';
-        $articleUrl = $baseUrl . 'artikel/';
-
+        $articleUrl = $this->baseUrl . 'artikel/';
         $articles = $this->scraperService->scrapeCategories($articleUrl);
 
         return view('scraped-article', ['articles' => $articles]);
@@ -57,9 +52,7 @@ class ScrapeController extends Controller
 
     public function recipeDetail($recipeKey)
     {
-        $baseUrl = 'https://www.masakapahariini.com/';
-
-        $recipeData = $this->scraperService->recipeDetail($baseUrl, $recipeKey);
+        $recipeData = $this->scraperService->recipeDetail($this->baseUrl, $recipeKey);
 
         return view('recipe-detail', ['recipeData' => $recipeData]);
     }
