@@ -147,16 +147,30 @@ class ScraperService
                 if ($quantityNode->count() > 0 && $unitNode->count() > 0) {
                     $quantity = trim($quantityNode->text());
                     $unit = trim($unitNode->text());
-            
+
                     return $quantity . ' ' . $unit;
                 }
-            
+
+                return null;
+            });
+
+            $steps = $crawler->filter('._recipe-steps .step')->each(function (Crawler $node) {
+                $stepsNumberNode = $node->filter('.number-step');
+                $stepsDetailNode = $node->filter('.content p');
+
+                if ($stepsNumberNode->count() > 0 && $stepsDetailNode->count() > 0) {
+                    $stepsNumber = trim($stepsNumberNode->text());
+                    $stepsDetail = trim($stepsDetailNode->text());
+
+                    return $stepsNumber . ' ' . $stepsDetail;
+                }
+
                 return null;
             });
 
             // Remove null value from ingredients because the filter cant find the part and item class
             $ingredients = array_values(array_filter($ingredients));
-
+            
             $recipeData = [
                 'title' => $title,
                 'thumbnail' => $thumbnail,
@@ -165,7 +179,8 @@ class ScraperService
                 'writer' => $writer,
                 'description' => $description,
                 'portions' => $quantity,
-                'ingredients' => $ingredients
+                'ingredients' => $ingredients,
+                'steps' => $steps
             ];
 
             return $recipeData;

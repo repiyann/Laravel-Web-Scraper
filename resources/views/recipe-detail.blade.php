@@ -25,6 +25,13 @@
             <li>{{ $ingredient }}</li>
         @endforeach
     </ul>
+
+    <h2>Steps:</h2>
+    <ul>
+        @foreach($recipeData['steps'] as $step)
+            <li>{{ $step }}</li>
+        @endforeach
+    </ul>
 </div>
 
 </body>
